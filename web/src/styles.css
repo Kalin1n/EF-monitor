@@ -1,0 +1,95 @@
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+  --series-in: #2a78d6; /* надійшло (слот 1) */
+  --series-out: #eb6834; /* витрачено (слот 2) */
+  --series-solar: #1baf7a; /* сонце (слот 3) */
+  --critical: #d03b3b;
+  --good-text: #006300;
+  --bad-text: #b02a2a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.1);
+    --series-in: #3987e5;
+    --series-out: #d95926;
+    --series-solar: #199e70;
+    --good-text: #0ca30c;
+    --bad-text: #e66767;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 15px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+.app { max-width: 1080px; margin: 0 auto; padding: 16px; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+h1 { font-size: 20px; margin: 0; }
+h2 { font-size: 15px; margin: 0 0 8px; color: var(--ink-2); font-weight: 600; }
+.muted { color: var(--muted); font-size: 13px; }
+
+.tabs, .seg { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+.tabs button, .seg button, select {
+  font: inherit; color: var(--ink-2); background: transparent;
+  border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; cursor: pointer;
+}
+.tabs button[aria-selected='true'], .seg button[aria-pressed='true'] {
+  color: var(--ink); background: var(--surface); border-color: var(--axis); font-weight: 600;
+}
+select { background: var(--surface); color: var(--ink); }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 16px; margin-bottom: 12px;
+}
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid .card { margin-bottom: 0; }
+
+.hero { font-size: 40px; font-weight: 600; line-height: 1.1; }
+.hero small { font-size: 16px; font-weight: 400; color: var(--ink-2); margin-left: 4px; }
+.row { display: flex; justify-content: space-between; gap: 8px; padding: 3px 0; color: var(--ink-2); }
+.row b { color: var(--ink); font-weight: 600; }
+
+.bar { height: 8px; background: var(--grid); border-radius: 4px; margin: 8px 0 10px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--series-in); border-radius: 4px; }
+
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--ink-2); }
+.badge.crit { color: var(--critical); border-color: var(--critical); font-weight: 600; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.dot.on { background: var(--series-solar); }
+
+.warn { border: 1px solid var(--axis); border-radius: 8px; padding: 8px 12px; margin: 8px 0; color: var(--ink-2); font-size: 13px; }
+
+.delta { font-size: 13px; color: var(--ink-2); }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--ink-2); font-weight: 600; }
+td { font-variant-numeric: tabular-nums; }
+
+.raw { max-height: 420px; overflow: auto; }
+input[type='search'] { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); width: 100%; margin-bottom: 8px; }
+
+.recharts-legend-item-text { color: var(--ink-2) !important; }
+.recharts-tooltip-wrapper .tip { background: var(--surface); border: 1px solid var(--axis); border-radius: 8px; padding: 8px 10px; font-size: 13px; color: var(--ink); }
+.tip div { display: flex; align-items: center; gap: 6px; }
+.tip i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }

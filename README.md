@@ -60,3 +60,8 @@ server/src/  config · ecoflow (підпис, REST) · metrics (мапінг к�
              blackout · energy · stats (day/week/month) · db (SQLite) · mock (демо) · index (Express API + SSE)
 web/src/     App.jsx (Зараз · Статистика · Блекаути · Дебаг) · api.js · format.js · styles.css
 ```
+
+## Гілки
+
+- `main` — стабільна гілка, лише релізи.
+- `development` — основна гілка розробки: усі фічі вливаються сюди через PR, а на реліз `development` мержиться в `main`.

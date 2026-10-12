@@ -58,7 +58,7 @@ npm start
 ```
 server/src/  config · ecoflow (підпис, REST) · metrics (мапінг ключів) · ingest (MQTT, знімки, енергія)
              blackout · energy · stats (day/week/month) · db (SQLite) · mock (демо) · index (Express API + SSE)
-web/src/     App.jsx (Зараз · Статистика · Блекаути · Дебаг) · api.js · format.js · styles.css
+web/src/     App.jsx (Зараз · Статистика · Блекаути · Дебаг) · api.js · format.js · components/ui.js (@emotion/styled) · styles/GlobalStyles.jsx (токени)
 ```
 
 ## Гілки

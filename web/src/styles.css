@@ -1,35 +1,45 @@
 :root {
   color-scheme: light;
-  --page: #f9f9f7;
-  --surface: #fcfcfb;
-  --ink: #0b0b0b;
-  --ink-2: #52514e;
-  --muted: #898781;
+  --page: #f7f7f4;
+  --surface: #fdfdfb;
+  --surface-sunken: #efeee9;
+  --ink: #111110;
+  --ink-2: #4f4e4a;
+  --muted: #6a6863; /* ≥4.5:1 на page/surface */
   --grid: #e1e0d9;
   --axis: #c3c2b7;
-  --border: rgba(11, 11, 11, 0.1);
+  --border: rgba(17, 17, 16, 0.12);
+  --accent: #2a6fc9; /* фокус */
   --series-in: #2a78d6; /* надійшло (слот 1) */
-  --series-out: #eb6834; /* витрачено (слот 2) */
-  --series-solar: #1baf7a; /* сонце (слот 3) */
-  --critical: #d03b3b;
-  --good-text: #006300;
+  --series-out: #dc5a24; /* витрачено (слот 2) */
+  --series-solar: #13926a; /* сонце (слот 3) */
+  --critical: #c42f2f;
+  --good-text: #1d6b1d;
   --bad-text: #b02a2a;
+  --warn-text: #8a5300;
+  --warn-bg: #fbf1de;
 }
 @media (prefers-color-scheme: dark) {
   :root:where(:not([data-theme='light'])) {
     color-scheme: dark;
-    --page: #0d0d0d;
+    --page: #0e0e0d;
     --surface: #1a1a19;
+    --surface-sunken: #141413;
     --ink: #f0efec;
     --ink-2: #c3c2b7;
+    --muted: #8f8d86;
     --grid: #2c2c2a;
-    --axis: #383835;
-    --border: rgba(255, 255, 255, 0.1);
+    --axis: #45443f;
+    --border: rgba(255, 255, 255, 0.12);
+    --accent: #5a9cf0;
     --series-in: #3987e5;
-    --series-out: #d95926;
-    --series-solar: #199e70;
-    --good-text: #0ca30c;
-    --bad-text: #e66767;
+    --series-out: #e0682f;
+    --series-solar: #22ad7d;
+    --critical: #ef6b6b;
+    --good-text: #3fbf5a;
+    --bad-text: #ef7b7b;
+    --warn-text: #e8b25c;
+    --warn-bg: #2a2214;
   }
 }
 
@@ -45,12 +55,14 @@ header { display: flex; align-items: center; justify-content: space-between; gap
 h1 { font-size: 20px; margin: 0; }
 h2 { font-size: 15px; margin: 0 0 8px; color: var(--ink-2); font-weight: 600; }
 .muted { color: var(--muted); font-size: 13px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .tabs, .seg { display: inline-flex; gap: 4px; flex-wrap: wrap; }
 .tabs button, .seg button, select {
   font: inherit; color: var(--ink-2); background: transparent;
   border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; cursor: pointer;
 }
+.tabs button:hover, .seg button:hover { color: var(--ink); }
 .tabs button[aria-selected='true'], .seg button[aria-pressed='true'] {
   color: var(--ink); background: var(--surface); border-color: var(--axis); font-weight: 600;
 }
@@ -68,7 +80,7 @@ select { background: var(--surface); color: var(--ink); }
 .row { display: flex; justify-content: space-between; gap: 8px; padding: 3px 0; color: var(--ink-2); }
 .row b { color: var(--ink); font-weight: 600; }
 
-.bar { height: 8px; background: var(--grid); border-radius: 4px; margin: 8px 0 10px; overflow: hidden; }
+.bar { height: 8px; background: var(--surface-sunken); border-radius: 4px; margin: 8px 0 10px; overflow: hidden; }
 .bar > i { display: block; height: 100%; background: var(--series-in); border-radius: 4px; }
 
 .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--ink-2); }
@@ -76,7 +88,7 @@ select { background: var(--surface); color: var(--ink); }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
 .dot.on { background: var(--series-solar); }
 
-.warn { border: 1px solid var(--axis); border-radius: 8px; padding: 8px 12px; margin: 8px 0; color: var(--ink-2); font-size: 13px; }
+.warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px; padding: 8px 12px; margin: 8px 0; font-size: 13px; }
 
 .delta { font-size: 13px; color: var(--ink-2); }
 
@@ -85,6 +97,7 @@ th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--gri
 th:first-child, td:first-child { text-align: left; }
 th { color: var(--ink-2); font-weight: 600; }
 td { font-variant-numeric: tabular-nums; }
+tbody tr:hover { background: var(--surface-sunken); }
 
 .raw { max-height: 420px; overflow: auto; }
 input[type='search'] { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); width: 100%; margin-bottom: 8px; }

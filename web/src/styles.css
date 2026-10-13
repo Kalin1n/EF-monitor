@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
-  --page: #f7f7f4;
-  --surface: #fdfdfb;
+  --page: #ebeae4;
+  --surface: #ffffff;
   --surface-sunken: #efeee9;
   --ink: #111110;
   --ink-2: #4f4e4a;
@@ -9,6 +9,7 @@
   --grid: #e1e0d9;
   --axis: #c3c2b7;
   --border: rgba(17, 17, 16, 0.12);
+  --card-shadow: 0 1px 2px rgba(17, 17, 16, 0.06), 0 2px 8px rgba(17, 17, 16, 0.05);
   --accent: #2a6fc9; /* фокус */
   --series-in: #2a78d6; /* надійшло (слот 1) */
   --series-out: #dc5a24; /* витрачено (слот 2) */
@@ -22,15 +23,16 @@
 @media (prefers-color-scheme: dark) {
   :root:where(:not([data-theme='light'])) {
     color-scheme: dark;
-    --page: #0e0e0d;
-    --surface: #1a1a19;
+    --page: #0b0b0a;
+    --surface: #1e1e1c;
     --surface-sunken: #141413;
     --ink: #f0efec;
     --ink-2: #c3c2b7;
     --muted: #8f8d86;
     --grid: #2c2c2a;
     --axis: #45443f;
-    --border: rgba(255, 255, 255, 0.12);
+    --border: rgba(255, 255, 255, 0.14);
+    --card-shadow: none;
     --accent: #5a9cf0;
     --series-in: #3987e5;
     --series-out: #e0682f;
@@ -70,6 +72,7 @@ select { background: var(--surface); color: var(--ink); }
 
 .card {
   background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: var(--card-shadow);
   padding: 14px 16px; margin-bottom: 12px;
 }
 .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }

@@ -23,6 +23,7 @@ npm start
 
 Розробка фронтенду: `cd web && npm run dev` (проксі `/api` → бекенд; інший порт: `API_PORT=5055 npm run dev`).
 Тести: `cd server && npm test`.
+CI (`.github/workflows/ci.yml`) запускає тести сервера й збірку фронтенду на кожен push у будь-яку гілку та на PR у `development`/`main`.
 
 ## Демо на GitHub Pages
 

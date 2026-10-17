@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import {
   Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
-import { useApi, useLive } from './api.js';
+import { STATIC, useApi, useLive } from './api.js';
 import {
   deltaPct, fmtDateTime, fmtDay, fmtDuration, fmtKwh, fmtTime, fmtW, fmtWh,
 } from './format.js';
@@ -293,7 +293,11 @@ export default function App() {
               {devices.map((d) => <option key={d.sn} value={d.sn}>{d.name}</option>)}
             </select>
           )}
-          <span className="badge"><span className={`dot ${connected ? 'on' : ''}`} />{connected ? 'підключено' : 'немає зв’язку з сервером'}</span>
+          {STATIC ? (
+            <span className="badge">демо-знімок</span>
+          ) : (
+            <span className="badge"><span className={`dot ${connected ? 'on' : ''}`} />{connected ? 'підключено' : 'немає зв’язку з сервером'}</span>
+          )}
         </div>
       </header>
       <nav className="tabs" role="tablist" style={{ marginBottom: 12 }}>
@@ -301,6 +305,12 @@ export default function App() {
           <button key={id} role="tab" aria-selected={tab === id} onClick={() => setTab(id)}>{label}</button>
         ))}
       </nav>
+      {STATIC && (
+        <div className="warn">
+          Це статичне демо на GitHub Pages: симульовані станції, дані зафіксовані на момент збірки.
+          Щоб бачити свої станції, запусти сервер локально (див. README).
+        </div>
+      )}
       {!devices && <p className="muted">Завантаження…</p>}
       {devices?.length === 0 && <p className="muted">Станцій не знайдено в акаунті.</p>}
       {devices?.length > 0 && (

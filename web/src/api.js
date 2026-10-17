@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react';
 
+// Статична збірка для GitHub Pages: замість бекенду читає знімок demo-API з JSON-файлів
+// (їх генерує web/scripts/snapshot.mjs). /series?sn=X&hours=24 → api/series/sn-X/hours-24.json
+export const STATIC = import.meta.env.VITE_STATIC === '1';
+
+export const staticPath = (path) =>
+  `api${path.replace('?', '/').replaceAll('&', '/').replaceAll('=', '-')}.json`;
+
 export async function api(path) {
-  const res = await fetch(`/api${path}`);
+  const url = STATIC ? `${import.meta.env.BASE_URL}${staticPath(path)}` : `/api${path}`;
+  const res = await fetch(url);
   if (!res.ok) throw new Error(`${res.status} ${path}`);
   return res.json();
 }
@@ -33,6 +41,10 @@ export function useLive() {
   const [devices, setDevices] = useState(null);
   const [connected, setConnected] = useState(false);
   useEffect(() => {
+    if (STATIC) {
+      api('/devices').then(setDevices).catch(() => setDevices([]));
+      return undefined;
+    }
     const es = new EventSource('/api/stream');
     es.onopen = () => setConnected(true);
     es.onerror = () => setConnected(false);

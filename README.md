@@ -24,6 +24,14 @@ npm start
 Розробка фронтенду: `cd web && npm run dev` (проксі `/api` → бекенд; інший порт: `API_PORT=5055 npm run dev`).
 Тести: `cd server && npm test`.
 
+## Демо на GitHub Pages
+
+`.github/workflows/pages.yml` при пуші в `main` (або вручну через *Run workflow*) збирає статичне демо:
+запускає сервер у demo-режимі, знімає відповіді API в JSON (`web/scripts/snapshot.mjs`) і збирає фронтенд
+з `VITE_STATIC=1`, щоб він читав ці файли замість бекенду. Дані зафіксовані на момент збірки, живого оновлення немає.
+
+Одноразове налаштування: **Settings → Pages → Source: GitHub Actions**.
+
 ## Як це працює
 
 - `server/src/ingest.js`: MQTT-підключення до брокера EcoFlow (облікові дані з `/iot-open/sign/certification`),
